@@ -164,17 +164,32 @@
     <script>
         // A $( document ).ready() block.
         // Shorthand for $( document ).ready()
+        // $(function () {
+        //     $(".main-menu button").on("click", function () {
+        //             $(".main-menu ul").toggle();
+        //             $(".main-menu button i").toggleClass("fa-sort-down").toggleClass("fa-sort-up");
+        //         });
+        //     if ($(window).width<=640) {
+        //         $(".main-menu ul").hide();
+        //     }
+        //     else{
+        //         $(".main-menu ul").show();
+        //     }
+        // });
         $(function () {
+            if($(".main-menu button").is(":visible")){
+                $(".main-menu ul").hide();
+            }
             $(".main-menu button").on("click", function () {
                     $(".main-menu ul").toggle();
                     $(".main-menu button i").toggleClass("fa-sort-down").toggleClass("fa-sort-up");
                 });
-            if ($(window).width<=640) {
-                $(".main-menu ul").hide();
-            }
-            else{
-                $(".main-menu ul").show();
-            }
+            // if ($(window).width<=640) {
+            //     $(".main-menu ul").hide();
+            // }
+            // else{
+            //     $(".main-menu ul").show();
+            // }
         });
     </script>
 </body>
