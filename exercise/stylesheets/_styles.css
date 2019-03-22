@@ -1,0 +1,379 @@
+html {
+    font: 16px sans-serif;
+    color: #555;
+    line-height: 1.4;
+}
+
+a {
+    color: #009ced;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0081c3;
+    text-decoration: underline;
+}
+
+.container {
+    width: 1080px;
+    margin: 0 auto;
+}
+header{
+    height: 40px;
+}
+.top {
+    background-color: black;
+}
+.top p{
+    line-height: 40px;
+    height: 40px;
+    text-align: center;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+}
+.menu{
+    height: 50px;
+    display: flex;
+}
+.menu ul{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex: 1;
+}
+.menu h1{
+    text-align: center;
+    margin: 0;
+    height: 50px;
+    line-height: 50px;
+}
+.menu ul.left{
+    margin-left: 30px;
+}
+.menu li{
+    margin: 0 10px;
+}
+.menu ul.right li:last-child{
+    margin: 0 30px 0 20px;
+    position: relative;
+}
+.menu ul.right li:last-child::before{
+    content: "1";
+    display: block;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    color: #fff;
+    font-size: 13px;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 50%;
+    top: 5px;
+    left: 15px;
+}
+.right{
+    justify-content: flex-end;
+}
+.menu li a{
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    color: #000;
+}
+.menu li a:hover{
+    color: rgb(35, 133, 190);
+    text-decoration-line: none;
+}
+.index-image {
+    height: 500px;
+    background: url(../images/01.jpg) center center no-repeat;
+    background-size: cover;
+    position: relative; 
+}
+.index-image h2{
+    font-size: 50px;
+    color: #fff;
+    -webkit-text-stroke: 1px rgb(95, 92, 92);
+    text-shadow: 1px 1px 0 #555;
+    position: absolute;
+    margin: 0 0 0 150px;
+    left: 5%;
+    top: 30%;
+}
+.footer-bottom{
+    text-align: center;
+    background-color: #ddd;
+    color: #000;
+    line-height: 40px;
+    height: 40px;
+}
+
+.footer-top ul{
+    margin: 0;
+    height: 50px;
+    background-color: #000;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-top ul li{
+    color: #fff;
+    height: 50px;
+    margin: 0 30px;
+    line-height: 50px;
+}
+.hot{
+    width: 1360px;
+    margin: 0 auto;
+}
+.hot h1{
+ text-align: center;
+ color: #000;
+}
+.hot ul{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.hot ul li{
+    flex: 0 0 340px;
+    text-align: center;
+}
+.hot h3{
+    margin: 0;
+    color: rgb(24, 24, 24);
+}
+.hot p{
+    margin: 5px 0;
+    color: #555;
+}
+.hot a:hover h3{
+    color: #4ba8d6;
+}
+
+.mes{
+    background-color: #aaa;
+    text-align: center;
+    color: #fff;
+}
+.mes h1{
+    height: 150px;
+    line-height: 150px;
+    margin: 0;
+}
+.mes p{
+    margin: 0;
+    padding: 0 0 50px 0;
+}
+.mail{
+    height: 300px;
+    text-align: center;
+    background-color: #eee;
+}
+.mail h2{
+    display: block;
+    margin: 0;
+    padding: 50px 0 50px 0;
+}
+.mail input.textbox{
+    height: 30px;
+    width: 465px;
+    background-color: transparent;
+    margin: 10px auto;
+    border: none;
+    border-bottom: #555 1px solid;
+    padding-left: 35px;
+}
+.mail input.button{
+    height: 30px;
+    width: 500px;
+    margin: 0 auto;
+    display: block;
+    border: none;
+    background-color: black;
+    color: #fff;
+}
+
+.mail i{
+    width: 0;
+    position: relative;
+    left: 10px;
+}
+
+.product{
+    margin: 80px 0;
+} 
+.product ul{
+    display: flex;
+    padding: 0;
+    list-style: none;
+    justify-content: space-between;
+}
+.product ul li.left{
+    width: 600px;
+}
+.product ul li.left div{
+    height: 600px;
+    width: 600px;
+    background: #fff;
+}
+.product ul li.left div img{
+    display: block;
+    margin: auto auto;
+    max-width: 600px;
+    max-height: 600px;
+}
+.product ul li.left p{
+    width: 600px;
+}
+.product ul li.right{
+    width: 450px;
+}
+.product ul li.right h2{
+    font-size: 2em;
+    margin: 0;
+    color: #000;
+}
+.product ul li.right h3{
+    margin: 20px 0 5px 0;
+}
+.product ul li.right h4{
+    font-size: 15px;
+    margin: 0 0 20px 0;
+    color: #999;
+}
+.product ul li.right select{
+    width: 100%;
+    height: 40px;
+    color: #999;
+}
+.product ul li.right input{
+    width: 25%;
+    height: 30px;
+    color: #999;
+}
+.product ul li.right input.Add{
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    margin: 20px 0 20px 0;
+}
+.product ul li.right ul{
+    list-style: none;
+    padding: 0;
+    display: block;
+}
+.product ul li.right ul li{
+    display: flex;
+    margin: 20px 0;
+    align-content: center;
+}
+.product ul li.right ul li p{
+    display: inline;
+    margin: auto 10px;
+
+}
+ul.product-bottom{
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+}
+ul.product-bottom li{
+    margin: 0 30px;
+}
+ul.product-bottom li a{
+    color: #000;
+}
+ul.product-bottom li a:hover{
+    color: rgb(49, 170, 201);
+}
+.product-top{
+    margin: 80px 0 0 0;
+}
+.shoppingcart ul{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+.shoppingcart ul li{
+    flex: 0 0 100px;
+}
+.shoppingcart ul li.cart-end{
+    flex: 0 0 300px;
+}
+.shoppingcart ul li input{
+    width: 86px;
+    padding-left: 10px;
+}
+.shoppingcart ul li.cart{
+    flex: 1 0 0;
+    display: flex;
+}
+.shoppingcart{
+    width: 900px;
+    margin: 80px auto 80px auto;
+}
+.shoppingcart h5{
+    margin: 0;
+    width: 100%;
+}
+.shoppingcart h3{
+    margin: 0;
+    width: 100%;
+}
+.shoppingcart ul li.total{
+    text-align: end;
+}
+.shoppingcart ul li div img{
+    display: block;
+    max-width: 120px;
+    max-height: 120px;
+    margin: auto auto;
+}
+.shoppingcart ul li div.pic{
+    width: 120px;
+    height: 120px;
+}
+.shoppingcart ul li div{
+    height: 120px;
+}
+
+.shoppingcart ul li div h2{
+    font-size: 1.3em;
+    margin: 0;
+    color: #000;
+}
+.shoppingcart ul li div h4{
+    font-size: 15px;
+    margin: 0 0 20px 0;
+    color: #999;
+}
+.shoppingcart ul li div a{
+    text-decoration-line: underline;
+    font-size: 12px;
+    color: #aaa;
+}
+.shoppingcart ul li.cart-end input{
+    width: 300px;
+    height: 30px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+}
+.shoppingcart ul li.cart h4{
+    margin: 0;
+}
+.shoppingcart ul li.cart input{
+    height: 20px;
+    margin: 0 0 0 3px;
+}
