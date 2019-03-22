@@ -398,7 +398,7 @@ $main-color: #000;
     }
   }
 }
-@media screen and (max-width: "767px") {
+@media screen and (max-width: 767px) {
   .hot {
     width: 600px;
     img {
@@ -422,7 +422,7 @@ $main-color: #000;
     }
   }
 }
-@media screen and (max-width: "640px") {
+@media screen and (max-width: 640px) {
   .mes {
     h1 {
       font-size: 30px;
@@ -451,7 +451,7 @@ $main-color: #000;
     }
   }
 }
-@media screen and (max-width: "580px") {
+@media screen and (max-width: 580px) {
   .shoppingcart {
     ul.cart {
       .cart-l {
