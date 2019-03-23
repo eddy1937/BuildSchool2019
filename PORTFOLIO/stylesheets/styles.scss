@@ -101,3 +101,9 @@ a:hover {
     margin: 0 3px;
   }
 }
+
+@media screen and (max-width: 580px) {
+  .block {
+    padding: 20px 5px;
+  }
+}

@@ -455,4 +455,10 @@ a:hover {
 .about-me i {
   margin: 0 3px;
 }
+
+@media screen and (max-width: 580px) {
+  .block {
+    padding: 20px 5px;
+  }
+}
 /*# sourceMappingURL=styles.css.map */
