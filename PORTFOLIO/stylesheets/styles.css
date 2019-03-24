@@ -357,6 +357,10 @@ a:hover {
   text-decoration: underline;
 }
 
+img {
+  width: 100%;
+}
+
 .container {
   width: 70%;
   margin: 0 auto;
@@ -455,9 +459,85 @@ a:hover {
   margin: 0 3px;
 }
 
+.highschoolnews {
+  text-align: center;
+}
+
+.highschoolnews img {
+  max-width: 600px;
+}
+
+.final-project ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  list-style: none;
+}
+
+.final-project ul li {
+  margin: 0 auto;
+}
+
+.final-project iframe {
+  margin: 0 auto;
+  width: 600px;
+  height: 360px;
+}
+
+@media screen and (max-width: 1140px) {
+  .final-project ul {
+    display: initial;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .final-project iframe {
+    width: 500px;
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  html {
+    font-size: 15px;
+  }
+  .final-project iframe {
+    width: 400px;
+    height: 240px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+  .final-project iframe {
+    width: 350px;
+    height: 210px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  html {
+    font-size: 13px;
+  }
+  .final-project iframe {
+    width: 300px;
+    height: 180px;
+  }
+}
+
 @media screen and (max-width: 580px) {
+  html {
+    font-size: 12px;
+  }
   .block {
     padding: 20px 5px;
+  }
+  .final-project iframe {
+    width: 275px;
+    height: 183px;
   }
 }
 /*# sourceMappingURL=styles.css.map */
