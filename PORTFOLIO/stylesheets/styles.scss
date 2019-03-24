@@ -30,7 +30,7 @@ img {
 .block {
   background-color: rgba(245, 245, 245, 0.85);
   border: #24292e 1px solid;
-  border-radius: 20px;
+  border-radius: 15px;
   padding: 20px 60px;
   box-shadow: 10px 10px 5px #24292e;
 
@@ -116,24 +116,29 @@ img {
   ul {
     display: flex;
     margin: 0;
+    padding: 0;
     list-style: none;
+    flex-wrap: wrap;
     li {
-      margin: 0 auto;
+      margin: 0 10px;
     }
   }
+  h3{
+    margin: 0;
+  }
   iframe {
-    margin: 0 auto;
+    margin-top: 20px;
     width: 100%;
     height: 360px;
   }
 }
 
 @media screen and (max-width: 1140px) {
-  .final-project {
-    ul {
-      display: initial;
-    }
-  }
+  // .final-project {
+  //   ul {
+  //     display: initial;
+  //   }
+  // }
 }
 
 @media screen and (max-width: 1080px) {
