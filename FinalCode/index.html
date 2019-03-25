@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<div class="container py-5">
+    <div class="row w-25 mx-auto my-5">
+        <span id="result" class="col-12 text-center h1"></span>
+        <input class="col-12" type="number" name="" id="input" readonly>
+        <button type="button" class="btn btn-outline-dark col-4">1</button>
+        <button type="button" class="btn btn-outline-dark col-4">2</button>
+        <button type="button" class="btn btn-outline-dark col-4">3</button>
+        <button type="button" class="btn btn-outline-dark col-4">4</button>
+        <button type="button" class="btn btn-outline-dark col-4">5</button>
+        <button type="button" class="btn btn-outline-dark col-4">6</button>
+        <button type="button" class="btn btn-outline-dark col-4">7</button>
+        <button type="button" class="btn btn-outline-dark col-4">8</button>
+        <button type="button" class="btn btn-outline-dark col-4">9</button>
+        <button type="button" class="btn btn-outline-dark col-4" id="clear">清除</button>
+        <button type="button" class="btn btn-outline-dark col-4">0</button>
+        <button type="button" class="btn btn-outline-dark col-4" id="check">確定</button>
+        <button type="button" class="btn btn-outline-dark col-12" id="restart">重新</button>
+    </div>
+</div>
+
+<body>
+    <script>
+
+        var min = 0;
+        var max = 100;
+        var ans = Math.floor(Math.random() * 100);
+        var result = document.getElementById("result");
+        var input = document.getElementById("input");
+
+        function doStart() {
+            min = 0;
+            max = 100;
+            ans = Math.floor(Math.random() * 100);
+
+            result.innerText = min + "~" + max;
+        };
+        result.innerText = min + "~" + max;
+        var Btn = document.getElementsByClassName("btn");
+        for (var i = 0; i < Btn.length; i++) {
+            Btn[i].onclick = getNum;
+        }
+        document.getElementById("clear").onclick = doClear;
+        document.getElementById("check").onclick = doCheck;
+        document.getElementById("restart").onclick = doStart;
+        function getNum() {
+            input.value += this.innerText;
+        };
+        function doClear() {
+            input.value = "";
+        };
+        function doCheck() {
+            var nowNum = input.value - 0;
+            input.value = "";
+            if (nowNum > min && nowNum < max) {
+                if (nowNum == ans) {
+                    result.innerText = ans;
+                    doStart();
+                    alert("很棒喔!!!猜對了");
+                    return;
+                }
+                if (nowNum < ans) {
+                    min = nowNum;
+                    result.innerText = min + "~" + max;
+                    return;
+                }
+                if (nowNum > ans) {
+                    max = nowNum;
+                    result.innerText = min + "~" + max;
+                    return;
+                }
+            }
+            else {
+                alert("??看不懂嗎?" + min + "~" + max);
+            }
+        };
+    </script>
+</body>
+
+</html>
