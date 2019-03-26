@@ -207,14 +207,17 @@
             }
             if (source.indexOf("*") != -1 || source.indexOf("/") != -1) {
                 for (var i = 0; i < source.length; i++) {
-                    var Nindex = -1;
+                    var Nindex=0;
+                    var bol=false;
                     if (source[i] == "*") {
                         Nindex = source[i - 1] * source[i + 1];
+                        bol=true;
                     }
                     if (source[i] == "/") {
                         Nindex = source[i - 1] / source[i + 1];
+                        bol=true;
                     }
-                    if (Nindex != -1) {
+                    if (bol) {
                         var new_s = [];
                         for (var j = 0; j < i - 1; j++) {
                             new_s[new_s.length] = source[j];
@@ -231,14 +234,17 @@
             }
             if (source.indexOf("+") != -1 || source.indexOf("-") != -1) {
                 for (var i = 0; i < source.length; i++) {
-                    var Nindex = -1;
+                    var Nindex=0;
+                    var bol=false;
                     if (source[i] == "+") {
                         Nindex = (source[i - 1] - 0) + (source[i + 1] - 0);
+                        bol=true;
                     }
                     if (source[i] == "-") {
                         Nindex = (source[i - 1] - 0) - (source[i + 1] - 0);
+                        bol=true;
                     }
-                    if (Nindex != -1) {
+                    if (bol) {
                         var new_s = [];
                         for (var j = 0; j < i - 1; j++) {
                             new_s[new_s.length] = source[j];
