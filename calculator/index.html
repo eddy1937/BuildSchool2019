@@ -28,7 +28,7 @@
         </h1> -->
         <input style=" background-color: black; height: 80px;"
             class="col-12 text-right w-100 mt-3 h1 text-white border-0" name="" id="input" readonly>
-        <button type="button" class="btn btn-secondary  rounded-circle mx-2" id="clear">
+        <button type="button" class="btn btn-secondary  rounded-circle mx-2" id="clear" value="AC">
             <h4>AC</h4>
         </button>
         <button type="button" class="btn btn-secondary rounded-circle mx-2" id="N-value">
@@ -37,49 +37,49 @@
         <button type="button" class="btn btn-secondary rounded-circle mx-2" id="percent">
             <h4>%</h4>
         </button>
-        <button type="button" class="btn btn-warning rounded-circle mx-2 Operation">
+        <button type="button" class="btn btn-warning rounded-circle mx-2 Operation" value="/">
             <h4>/</h4>
         </button>
-        <button type="button" class="btn btn-dark rounded-circle mx-2 num">
+        <button type="button" class="btn btn-dark rounded-circle mx-2 num" value="7">
             <h4>7</h4>
         </button>
-        <button type="button" class="btn btn-dark rounded-circle mx-2 num">
+        <button type="button" class="btn btn-dark rounded-circle mx-2 num" value="8">
             <h4>8</h4>
         </button>
-        <button type="button" class="btn btn-dark rounded-circle mx-2 num">
+        <button type="button" class="btn btn-dark rounded-circle mx-2 num" value="9">
             <h4>9</h4>
         </button>
-        <button type="button" class="btn btn-warning rounded-circle mx-2 Operation">
+        <button type="button" class="btn btn-warning rounded-circle mx-2 Operation" value="*">
             <h4>*</h4>
         </button>
-        <button type="button" class="btn btn-dark rounded-circle mx-2 num">
+        <button type="button" class="btn btn-dark rounded-circle mx-2 num" value="4">
             <h4>4</h4>
         </button>
-        <button type="button" class="btn btn-dark rounded-circle mx-2 num">
+        <button type="button" class="btn btn-dark rounded-circle mx-2 num" value="5">
             <h4>5</h4>
         </button>
-        <button type="button" class="btn btn-dark rounded-circle mx-2 num">
+        <button type="button" class="btn btn-dark rounded-circle mx-2 num" value="6">
             <h4>6</h4>
         </button>
-        <button type="button" class="btn btn-warning rounded-circle mx-2 Operation">
+        <button type="button" class="btn btn-warning rounded-circle mx-2 Operation" value="-">
             <h4>-</h4>
         </button>
-        <button type="button" class="btn btn-dark rounded-circle mx-2 num">
+        <button type="button" class="btn btn-dark rounded-circle mx-2 num" value="1">
             <h4>1</h4>
         </button>
-        <button type="button" class="btn btn-dark rounded-circle mx-2 num">
+        <button type="button" class="btn btn-dark rounded-circle mx-2 num" value="2">
             <h4>2</h4>
         </button>
-        <button type="button" class="btn btn-dark rounded-circle mx-2 num">
+        <button type="button" class="btn btn-dark rounded-circle mx-2 num" value="3">
             <h4>3</h4>
         </button>
-        <button type="button" class="btn btn-warning rounded-circle mx-2 Operation">
+        <button type="button" class="btn btn-warning rounded-circle mx-2 Operation" value="+">
             <h4>+</h4>
         </button>
-        <button style="width:136px;" type="button" class="btn btn-dark rounded-pill mx-2 num">
+        <button style="width:136px;" type="button" class="btn btn-dark rounded-pill mx-2 num" value="0">
             <h4>0</h4>
         </button>
-        <button type="button" class="btn btn-dark rounded-circle mx-2" id="pot">
+        <button type="button" class="btn btn-dark rounded-circle mx-2" id="pot" value=".">
             <h4>.</h4>
         </button>
         <button type="button" class="btn btn-warning rounded-circle mx-2" id="equal">
@@ -114,7 +114,7 @@
             }
             // s+=input.value+this.innerText;
             s[s.length] = input.value;
-            s[s.length] = this.innerText;
+            s[s.length] = this.value;
             input.value = "";
             sid.innerText = s.join(" ");
         };
