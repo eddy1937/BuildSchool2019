@@ -98,11 +98,12 @@
         for (var i = 0; i < Operation.length; i++) {
             Operation[i].onclick = doOperation;
         }
-        document.getElementById("clear").onclick = doClear;
+        
+        var c = document.getElementById("clear");
+        c.onclick = doClear;
         document.getElementById("N-value").onclick = donValue;
         document.getElementById("pot").onclick = doPot;
         document.getElementById("percent").onclick = doPercent;
-        var c = document.getElementById("clear");
         var s = [];
         function doOperation() {
             if (input.value == "") {
