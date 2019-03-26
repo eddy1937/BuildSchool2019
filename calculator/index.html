@@ -132,7 +132,6 @@
             c.innerHTML = "<h4>C</h4>";
         };
         function doClear() {
-            alert(0);
             if (c.value == "AC") {
                 input.value = "";
                 s = [];
@@ -177,7 +176,6 @@
                     s[s.length] = input.value;
                 }
             }
-            alert(s);
             input.value = getAns(s);
             sid.innerText = getAns(s);
             // alert(s);
