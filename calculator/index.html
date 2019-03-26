@@ -17,6 +17,19 @@
             width: 60px;
             height: 60px;
         }
+
+        /* .btn-warning:hover {
+            color: #212529;
+            background-color: #e0a800;
+            border-color: #d39e00;
+        } */
+
+        .btn-warning:focus,.btn-warning.focus {
+            /* box-shadow: 0 0 0 0.2rem rgba(222, 170, 12, 0.5); */
+            color: #e0a800;
+            background-color: #fff;
+            /* border-color: #d39e00; */
+        }
     </style>
 </head>
 
@@ -98,7 +111,7 @@
         for (var i = 0; i < Operation.length; i++) {
             Operation[i].onclick = doOperation;
         }
-        
+
         var c = document.getElementById("clear");
         c.onclick = doClear;
         document.getElementById("N-value").onclick = donValue;
