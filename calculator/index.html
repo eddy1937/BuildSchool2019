@@ -24,7 +24,8 @@
             border-color: #d39e00;
         } */
 
-        .btn-warning:focus,.btn-warning.focus {
+        .btn-warning:focus,
+        .btn-warning.focus {
             /* box-shadow: 0 0 0 0.2rem rgba(222, 170, 12, 0.5); */
             color: #e0a800;
             background-color: #fff;
@@ -120,6 +121,10 @@
         var s = [];
         function doOperation() {
             if (input.value == "") {
+                if (isNaN(s[s.length - 1]) && s.length >= 2) {
+                    s[s.length - 1] = this.value;
+                    sid.innerText = s.join(" ");
+                }
                 return;
             }
             if (!isNaN(s[s.length - 1])) {
@@ -207,15 +212,15 @@
             }
             if (source.indexOf("*") != -1 || source.indexOf("/") != -1) {
                 for (var i = 0; i < source.length; i++) {
-                    var Nindex=0;
-                    var bol=false;
+                    var Nindex = 0;
+                    var bol = false;
                     if (source[i] == "*") {
                         Nindex = source[i - 1] * source[i + 1];
-                        bol=true;
+                        bol = true;
                     }
                     if (source[i] == "/") {
                         Nindex = source[i - 1] / source[i + 1];
-                        bol=true;
+                        bol = true;
                     }
                     if (bol) {
                         var new_s = [];
@@ -234,15 +239,15 @@
             }
             if (source.indexOf("+") != -1 || source.indexOf("-") != -1) {
                 for (var i = 0; i < source.length; i++) {
-                    var Nindex=0;
-                    var bol=false;
+                    var Nindex = 0;
+                    var bol = false;
                     if (source[i] == "+") {
                         Nindex = (source[i - 1] - 0) + (source[i + 1] - 0);
-                        bol=true;
+                        bol = true;
                     }
                     if (source[i] == "-") {
                         Nindex = (source[i - 1] - 0) - (source[i + 1] - 0);
-                        bol=true;
+                        bol = true;
                     }
                     if (bol) {
                         var new_s = [];
