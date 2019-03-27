@@ -169,6 +169,9 @@
                 return;
             }
             input.value = parseFloat(input.value) * -1;
+            if (isNaN(input.value)) {
+                input.value = "錯誤";
+            }
         };
         function doPot() {
             if (input.value.indexOf(".") != -1 || input.value == "") {
@@ -181,7 +184,9 @@
                 return;
             }
             input.value = parseFloat(input.value) / 100;
-
+            if (isNaN(input.value)) {
+                input.value = "錯誤";
+            }
         };
 
         document.getElementById("equal").onclick = doEqual;
@@ -197,8 +202,14 @@
                     s[s.length] = input.value;
                 }
             }
-            input.value = getAns(s);
-            sid.innerText = getAns(s);
+            if (isNaN(getAns(s))) {
+                input.value = "錯誤";
+                sid.innerText = "錯誤";
+            }
+            else {
+                input.value = getAns(s);
+                sid.innerText = getAns(s);
+            }
             // alert(s);
             s = [];
             // var test = "1+2+9/3*3+2*1";
