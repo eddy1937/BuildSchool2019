@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        #result {
+            width: 600px;
+            height: 600px;
+            /* background-color: red; */
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 class="text-center">按F5重整，button還沒做</h2>
+    <div id="result" class="row">
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+    </div>
+    <h2 id="ans"></h2>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            var result = $("#result");
+            var s = "";
+            var items = $(".col-3").children().prevObject.toArray();
+            for (var i = 0; i < 16; i++) {
+                items[i].onclick = doClear;
+                items[i].value = i;
+                $(items[i]).css("background-image","url(photo.jpg)").css("background-position-y",(Math.floor(i/4))*-150+"px").css("background-position-x",(i%4)*-150+"px");
+                // background-position-y
+            }
+            var is = "";
+            var lastIndex = 15;
+            var ans = [];
+            var ansZH = [];
+            // $(items[15]).text("");
+            // $(items[15]).css("background-image","url()");
+            console.log(items);
+            var n = 1;
+            while (ans.length <= 20) {
+                var r = Math.floor(Math.random() * 100) % 16;
+                if ((lastIndex + 1 == r && lastIndex % 4 != 3) || (lastIndex - 1 == r && lastIndex % 4 != 0) || lastIndex - 4 == r || lastIndex + 4 == r) {
+                    doChange(items[r]);
+                }
+            }
+            $("h2#ans").text(ansZH.join("<-"));
+            function doClear() {
+                var nowIndex = items.indexOf(this);
+                if ((lastIndex + 1 == nowIndex && lastIndex % 4 != 3) || (lastIndex - 1 == nowIndex && lastIndex % 4 != 0) || lastIndex - 4 == nowIndex || lastIndex + 4 == nowIndex) {
+                    doChange(this);
+                }
+                else {
+
+                }
+                $("h2#ans").text(ansZH.join("<-"));
+                
+                if(doCheaked()){
+                    $(items[lastIndex]).css("background-image","url(photo.jpg)").css("background-position-x",nowthis_x).css("background-position-y",nowthis_y);
+                    alert("成功");
+                }
+            };
+            function doChange(nowthis) {
+                var nowIndex = items.indexOf(nowthis);
+                if (lastIndex + 1 == nowIndex || lastIndex - 1 == nowIndex || lastIndex - 4 == nowIndex || lastIndex + 4 == nowIndex) {
+                    // $(this).css("background-color", "red");
+                    if (ans[ans.length - 1] == nowthis.value) {
+                        ans.pop();
+                        ansZH.pop();
+                    }
+                    else {
+                        ans[ans.length] = nowthis.value;
+                        // ansZH
+                        if (lastIndex + 1 == nowIndex) {//
+                            ansZH[ansZH.length] = "左";
+                        }
+                        if (lastIndex - 1 == nowIndex) {//
+                            ansZH[ansZH.length] = "右";
+                        }
+                        if (lastIndex + 4 == nowIndex) {//
+                            ansZH[ansZH.length] = "上";
+                        }
+                        if (lastIndex - 4 == nowIndex) {//
+                            ansZH[ansZH.length] = "下";
+                        }
+                    }
+                    // $(items[lastIndex]).text($(nowthis).text());
+                    var a = items[lastIndex].value;
+                    items[lastIndex].value = nowthis.value;
+                    nowthis.value = a;
+                    var lastIndex_x=$(items[lastIndex]).css("background-position-x");
+                    var lastIndex_y=$(items[lastIndex]).css("background-position-y");
+                    var nowthis_x =$(nowthis).css("background-position-x");
+                    var nowthis_y =$(nowthis).css("background-position-y");
+                    $(items[lastIndex]).css("background-image","url(photo.jpg)").css("background-position-x",nowthis_x).css("background-position-y",nowthis_y);
+                    $(nowthis).css("background-image","url()").css("background-position-x",lastIndex_x).css("background-position-y",lastIndex_y);
+                    
+                    // $(nowthis).text("");
+                    lastIndex = nowIndex;
+                }
+            };
+            function doCheaked() {
+                for (var i = 0; i < 16; i++) {
+                    if(items[i].value != i){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        });
+    </script>
+</body>
+
+</html>
