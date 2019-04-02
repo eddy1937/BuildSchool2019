@@ -14,12 +14,20 @@
             height: 600px;
             /* background-color: red; */
             margin: 0 auto;
+            position: relative;
         }
 
         #restart {
             width: 600px;
             display: block;
             margin: 0 auto;
+        }
+
+        .col-3 {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            /* background-color: red; */
         }
     </style>
 </head>
@@ -45,6 +53,7 @@
         <div class="col-3 border"></div>
         <div class="col-3 border"></div>
         <div class="col-3 border"></div>
+        <!-- <div id="move" class="border"></div> -->
         <!-- <div class="col-3"></div>
         <div class="col-3"></div>
         <div class="col-3"></div>
@@ -69,95 +78,117 @@
     <script>
         $(function () {
             var result = $("#result");
+            var n_index = [];
             var s = "";
             var items = $(".col-3").children().prevObject.toArray();
             restart();
+            doCheaked();
             var is = "";
             // $(items[15]).text("");
             // $(items[15]).css("background-image","url()");
             // console.log(items);
             var lastIndex = 15;
+            var lastleft = "450px";
+            var lasttop = "450px";
             var ans = [];
             var ansZH = [];
             var n = 1;
             function restart() {
+                n_index = [];
                 for (var i = 0; i < 16; i++) {
                     items[i].onclick = doClear;
                     items[i].value = i;
+                    n_index[n_index.length] = i;
+                    var goRight = (i % 4) * 150;
+                    var goDown = (Math.floor(i / 4)) * 150;
+                    $(items[i]).css("left", goRight + "px").css("top", goDown + "px");
                     $(items[i]).css("background-image", "url(photo.jpg)").css("background-position-y", (Math.floor(i / 4)) * -150 + "px").css("background-position-x", (i % 4) * -150 + "px");
-                    // background-position-y
                 }
             };
-            // $("h2#ans").text(ansZH.join("<-"));
+            function checkIndex() {
+                for (var a = 0; a < 16; a++) {
+                    $(items[a]).finish();
+                }
+            };
             $("#restart").on("click", function () {
+                checkIndex();
                 // alert();
                 restart();
                 lastIndex = 15;
+                $(items[15]).css("display", "none");
                 ans = [];
                 ansZH = [];
                 var num = Math.floor(Math.random() * 1000) % 20;
-                while (ans.length <= 20 + num) {
+                var n = -1;
+                while (ans.length < 20) {
                     var r = Math.floor(Math.random() * 100) % 16;
-                    if ((lastIndex + 1 == r && lastIndex % 4 != 3) || (lastIndex - 1 == r && lastIndex % 4 != 0) || lastIndex - 4 == r || lastIndex + 4 == r) {
-                        doChange(items[r]);
+                    if (r != n) {
+                        doChange(items[n_index.indexOf(r)]);
+                        n=lastIndex;
                     }
                 }
             });
             function doClear() {
-                var nowIndex = items.indexOf(this);
-                if ((lastIndex + 1 == nowIndex && lastIndex % 4 != 3) || (lastIndex - 1 == nowIndex && lastIndex % 4 != 0) || lastIndex - 4 == nowIndex || lastIndex + 4 == nowIndex) {
-                    doChange(this);
-                }
-                // $("h2#ans").text(ansZH.join("<-"));
-
+                doChange(this);
                 if (doCheaked()) {
-                    $(items[lastIndex]).css("background-image", "url(photo.jpg)");
                     // alert("成功");
+                    $(items[15]).css("display", "block");
+                    for (var a = 0; a < 16; a++) {
+                        items[a].onclick = null;
+                    }
                 }
             };
             function doChange(nowthis) {
                 var nowIndex = items.indexOf(nowthis);
-                if (lastIndex + 1 == nowIndex || lastIndex - 1 == nowIndex || lastIndex - 4 == nowIndex || lastIndex + 4 == nowIndex) {
-                    // $(this).css("background-color", "red");
-                    if (ans[ans.length - 1] == nowthis.value) {
+                n_index[15] = lastIndex;
+                var r = n_index[nowIndex];
+                if ((lastIndex + 1 == r && lastIndex % 4 != 3) || (lastIndex - 1 == r && lastIndex % 4 != 0) || lastIndex - 4 == r || lastIndex + 4 == r) {
+                    var goRight = (r % 4) * 150;
+                    var goDown = (Math.floor(r / 4)) * 150;
+                    if (ans[ans.length - 1] == r) {
                         ans.pop();
                         ansZH.pop();
                     }
                     else {
-                        ans[ans.length] = nowthis.value;
                         // ansZH
-                        if (lastIndex + 1 == nowIndex) {//
+                        if (lastIndex + 1 == r) {//
                             ansZH[ansZH.length] = "左";
+                            ans[ans.length] = r - 1;
                         }
-                        if (lastIndex - 1 == nowIndex) {//
+                        if (lastIndex - 1 == r) {//
                             ansZH[ansZH.length] = "右";
+                            ans[ans.length] = r + 1;
                         }
-                        if (lastIndex + 4 == nowIndex) {//
+                        if (lastIndex + 4 == r) {//
                             ansZH[ansZH.length] = "上";
+                            ans[ans.length] = r - 4;
                         }
-                        if (lastIndex - 4 == nowIndex) {//
+                        if (lastIndex - 4 == r) {//
                             ansZH[ansZH.length] = "下";
+                            ans[ans.length] = r + 4;
                         }
                     }
-                    // $(items[lastIndex]).text($(nowthis).text());
-                    var a = items[lastIndex].value;
-                    items[lastIndex].value = nowthis.value;
-                    nowthis.value = a;
-                    var lastIndex_x = $(items[lastIndex]).css("background-position-x");
-                    var lastIndex_y = $(items[lastIndex]).css("background-position-y");
-                    var nowthis_x = $(nowthis).css("background-position-x");
-                    var nowthis_y = $(nowthis).css("background-position-y");
-                    $(items[lastIndex]).css("background-image", "url(photo.jpg)").css("background-position-x", nowthis_x).css("background-position-y", nowthis_y);
-                    $(nowthis).css("background-image", "url()").css("background-position-x", lastIndex_x).css("background-position-y", lastIndex_y);
-
-                    // $(nowthis).text("");
-                    lastIndex = nowIndex;
+                    if (lastIndex + 1 == r) {//
+                        $(nowthis).animate({ left: (goRight - 150) + "px" }, 150);
+                    }
+                    if (lastIndex - 1 == r) {//
+                        $(nowthis).animate({ left: (goRight + 150) + "px" }, 150);
+                    }
+                    if (lastIndex + 4 == r) {//
+                        $(nowthis).animate({ top: (goDown - 150) + "px" }, 150);
+                    }
+                    if (lastIndex - 4 == r) {//
+                        $(nowthis).animate({ top: (goDown + 150) + "px" }, 150);
+                    }
+                    n_index[nowIndex] = lastIndex;
+                    lastIndex = r;
                 }
                 // $("h2#ans").text(ansZH.join("<-"));
+                console.log(ansZH[ansZH.length - 1]);
             };
             function doCheaked() {
-                for (var i = 0; i < 16; i++) {
-                    if (items[i].value != i) {
+                for (var i = 0; i < 15; i++) {
+                    if (n_index[i] != i) {
                         return false;
                     }
                 }
