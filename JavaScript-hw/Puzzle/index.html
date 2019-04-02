@@ -120,7 +120,7 @@
                 ansZH = [];
                 var num = Math.floor(Math.random() * 1000) % 20;
                 var n = -1;
-                while (ans.length < 20) {
+                while (ans.length < 20+num) {
                     var r = Math.floor(Math.random() * 100) % 16;
                     if (r != n) {
                         doChange(items[n_index.indexOf(r)]);
