@@ -15,12 +15,37 @@
             /* background-color: red; */
             margin: 0 auto;
         }
+
+        #restart {
+            width: 600px;
+            display: block;
+            margin: 0 auto;
+        }
     </style>
 </head>
 
 <body>
-    <h2 class="text-center">按F5重整，button還沒做</h2>
+
+
+    <h2 class="text-center"></h2>
     <div id="result" class="row">
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <div class="col-3 border"></div>
+        <!-- <div class="col-3"></div>
         <div class="col-3"></div>
         <div class="col-3"></div>
         <div class="col-3"></div>
@@ -35,9 +60,9 @@
         <div class="col-3"></div>
         <div class="col-3"></div>
         <div class="col-3"></div>
-        <div class="col-3"></div>
-        <div class="col-3"></div>
+        <div class="col-3"></div> -->
     </div>
+    <button id="restart" type="button" class="btn btn-outline-dark">洗牌</button>
     <h2 id="ans"></h2>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -46,41 +71,48 @@
             var result = $("#result");
             var s = "";
             var items = $(".col-3").children().prevObject.toArray();
-            for (var i = 0; i < 16; i++) {
-                items[i].onclick = doClear;
-                items[i].value = i;
-                $(items[i]).css("background-image", "url(photo.jpg)").css("background-position-y", (Math.floor(i / 4)) * -150 + "px").css("background-position-x", (i % 4) * -150 + "px");
-                // background-position-y
-            }
+            restart();
             var is = "";
+            // $(items[15]).text("");
+            // $(items[15]).css("background-image","url()");
+            // console.log(items);
             var lastIndex = 15;
             var ans = [];
             var ansZH = [];
-            // $(items[15]).text("");
-            // $(items[15]).css("background-image","url()");
-            console.log(items);
             var n = 1;
-            var num = Math.floor(Math.random() * 1000) % 20;
-            while (ans.length <= 20 + num) {
-                var r = Math.floor(Math.random() * 100) % 16;
-                if ((lastIndex + 1 == r && lastIndex % 4 != 3) || (lastIndex - 1 == r && lastIndex % 4 != 0) || lastIndex - 4 == r || lastIndex + 4 == r) {
-                    doChange(items[r]);
+            function restart() {
+                for (var i = 0; i < 16; i++) {
+                    items[i].onclick = doClear;
+                    items[i].value = i;
+                    $(items[i]).css("background-image", "url(photo.jpg)").css("background-position-y", (Math.floor(i / 4)) * -150 + "px").css("background-position-x", (i % 4) * -150 + "px");
+                    // background-position-y
                 }
-            }
-            $("h2#ans").text(ansZH.join("<-"));
+            };
+            // $("h2#ans").text(ansZH.join("<-"));
+            $("#restart").on("click", function () {
+                // alert();
+                restart();
+                lastIndex = 15;
+                ans = [];
+                ansZH = [];
+                var num = Math.floor(Math.random() * 1000) % 20;
+                while (ans.length <= 20 + num) {
+                    var r = Math.floor(Math.random() * 100) % 16;
+                    if ((lastIndex + 1 == r && lastIndex % 4 != 3) || (lastIndex - 1 == r && lastIndex % 4 != 0) || lastIndex - 4 == r || lastIndex + 4 == r) {
+                        doChange(items[r]);
+                    }
+                }
+            });
             function doClear() {
                 var nowIndex = items.indexOf(this);
                 if ((lastIndex + 1 == nowIndex && lastIndex % 4 != 3) || (lastIndex - 1 == nowIndex && lastIndex % 4 != 0) || lastIndex - 4 == nowIndex || lastIndex + 4 == nowIndex) {
                     doChange(this);
                 }
-                else {
-
-                }
-                $("h2#ans").text(ansZH.join("<-"));
+                // $("h2#ans").text(ansZH.join("<-"));
 
                 if (doCheaked()) {
-                    $(items[lastIndex]).css("background-image", "url(photo.jpg)").css("background-position-x", nowthis_x).css("background-position-y", nowthis_y);
-                    alert("成功");
+                    $(items[lastIndex]).css("background-image", "url(photo.jpg)");
+                    // alert("成功");
                 }
             };
             function doChange(nowthis) {
@@ -121,6 +153,7 @@
                     // $(nowthis).text("");
                     lastIndex = nowIndex;
                 }
+                // $("h2#ans").text(ansZH.join("<-"));
             };
             function doCheaked() {
                 for (var i = 0; i < 16; i++) {

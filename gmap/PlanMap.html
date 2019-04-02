@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+        }
+    </style>
+</head>
+
+<body>
+    <button type="button" id="create" class="btn btn-light">規劃路線</button>
+    <div id="map"></div>
+    <div class="form-group">
+        <p>旅館</p>
+        <select id="hotel" class="form-control" style="width:300px;" multiple="">
+        </select>
+    </div>
+    <div class="form-group">
+        <p>景點</p>
+        <select id="place" class="form-control" style="width:300px;height: 400px;" multiple="">
+        </select>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU"></script>
+    <script>
+
+        var hotelList = [];
+        var placeList = [];
+        var map;
+        var directionsService = new google.maps.DirectionsService();
+        var directionsDisplay = new google.maps.DirectionsRenderer();
+        var chicago = new google.maps.LatLng(24.801815, 120.971459);
+        var mapOptions = {
+            zoom: 15,
+            center: chicago
+        }
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        directionsDisplay.setMap(map);
+        $(function () {
+            // var url
+            createList($("#hotel"), "旅館名稱", hotelList, "http://icons.iconarchive.com/icons/dapino/summer-holiday/32/hotel-icon.png", "http://opendata.hccg.gov.tw/dataset/39ee314b-7ce7-4265-a6b5-b57f42392da8/resource/6a3a5f61-5383-419d-a94c-df710071a51e/download/20180321131425502.json");
+            createList($("#place"), "古蹟名稱", placeList, "http://icons.iconarchive.com/icons/vectorizeimages/iconpack/32/map-icon.png", "http://opendata.hccg.gov.tw/dataset/7ea7e303-df62-4fbe-a84f-99bdd724b577/resource/c15a9c5f-f6cb-4da5-b8a6-5e7bc4c9eb08/download/20180501160733080.json");
+
+            function createList(item, name, list, icons, url) {
+                $.get(url).done(function (posts) {
+                    posts.forEach(element => {
+                        item.append("<option>" + element[name] + "</option>");
+                        list[list.length] = [element[name], element.緯度, element.經度];
+                        var marker = new google.maps.Marker({
+                            position: {
+                                lat: parseFloat(element.緯度),
+                                lng: parseFloat(element.經度)
+                            },
+                            map: map,
+                            icon: icons,
+                            title: element[name]
+                        });
+                    });
+                });
+            }
+            console.log(hotelList);
+            console.log(placeList);
+        });
+        $("#create").click(function createClick() {
+            displayRoute(directionsService, directionsDisplay);
+        });
+        function displayRoute(directionsService, directionsDisplay) {
+            var waypoints = [];
+            var place_Array = document.getElementById('place');
+            for (var i = 0; i < place_Array.length; i++) {
+                if (place_Array.options[i].selected) {
+                    waypoints.push({
+                        location: place_Array[i].value,
+                        stopover: true
+                    });
+                }
+            }
+            var hotel_Array = document.getElementById('hotel');
+            for (var i = 0; i < hotel_Array.length; i++) {
+                if (hotel_Array.options[i].selected) {
+                    waypoints.push({
+                        location: hotel_Array[i].value,
+                        stopover: true
+                    });
+                }
+            }
+            directionsService.route({
+                origin: document.getElementById('hotel').value,
+                destination: document.getElementById('place').value,
+                waypoints: waypoints,
+                optimizeWaypoints: true,
+                travelMode: 'DRIVING'
+            }, function (response, status) {
+                if (status === 'OK') {
+                    directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+    </script>
+    <!-- <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU&callback=initMap">
+        </script> -->
+</body>
+
+</html>
