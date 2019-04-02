@@ -49,7 +49,7 @@
             for (var i = 0; i < 16; i++) {
                 items[i].onclick = doClear;
                 items[i].value = i;
-                $(items[i]).css("background-image","url(photo.jpg)").css("background-position-y",(Math.floor(i/4))*-150+"px").css("background-position-x",(i%4)*-150+"px");
+                $(items[i]).css("background-image", "url(photo.jpg)").css("background-position-y", (Math.floor(i / 4)) * -150 + "px").css("background-position-x", (i % 4) * -150 + "px");
                 // background-position-y
             }
             var is = "";
@@ -60,7 +60,8 @@
             // $(items[15]).css("background-image","url()");
             console.log(items);
             var n = 1;
-            while (ans.length <= 20) {
+            var num = Math.floor(Math.random() * 1000) % 20;
+            while (ans.length <= 20 + num) {
                 var r = Math.floor(Math.random() * 100) % 16;
                 if ((lastIndex + 1 == r && lastIndex % 4 != 3) || (lastIndex - 1 == r && lastIndex % 4 != 0) || lastIndex - 4 == r || lastIndex + 4 == r) {
                     doChange(items[r]);
@@ -76,9 +77,9 @@
 
                 }
                 $("h2#ans").text(ansZH.join("<-"));
-                
-                if(doCheaked()){
-                    $(items[lastIndex]).css("background-image","url(photo.jpg)").css("background-position-x",nowthis_x).css("background-position-y",nowthis_y);
+
+                if (doCheaked()) {
+                    $(items[lastIndex]).css("background-image", "url(photo.jpg)").css("background-position-x", nowthis_x).css("background-position-y", nowthis_y);
                     alert("成功");
                 }
             };
@@ -110,20 +111,20 @@
                     var a = items[lastIndex].value;
                     items[lastIndex].value = nowthis.value;
                     nowthis.value = a;
-                    var lastIndex_x=$(items[lastIndex]).css("background-position-x");
-                    var lastIndex_y=$(items[lastIndex]).css("background-position-y");
-                    var nowthis_x =$(nowthis).css("background-position-x");
-                    var nowthis_y =$(nowthis).css("background-position-y");
-                    $(items[lastIndex]).css("background-image","url(photo.jpg)").css("background-position-x",nowthis_x).css("background-position-y",nowthis_y);
-                    $(nowthis).css("background-image","url()").css("background-position-x",lastIndex_x).css("background-position-y",lastIndex_y);
-                    
+                    var lastIndex_x = $(items[lastIndex]).css("background-position-x");
+                    var lastIndex_y = $(items[lastIndex]).css("background-position-y");
+                    var nowthis_x = $(nowthis).css("background-position-x");
+                    var nowthis_y = $(nowthis).css("background-position-y");
+                    $(items[lastIndex]).css("background-image", "url(photo.jpg)").css("background-position-x", nowthis_x).css("background-position-y", nowthis_y);
+                    $(nowthis).css("background-image", "url()").css("background-position-x", lastIndex_x).css("background-position-y", lastIndex_y);
+
                     // $(nowthis).text("");
                     lastIndex = nowIndex;
                 }
             };
             function doCheaked() {
                 for (var i = 0; i < 16; i++) {
-                    if(items[i].value != i){
+                    if (items[i].value != i) {
                         return false;
                     }
                 }
