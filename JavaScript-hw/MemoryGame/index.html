@@ -157,7 +157,7 @@
                 for (var i = 0; i < items.length; i++) {
                     var goRight = 23.2 + (i % 4) * (23.2 + 71);
                     var goDown = 13.2 + (Math.floor(i / 4)) * (13.2 + 96);
-                    $(items[i]).animate({ left: (goRight) + "px", top: (goDown) + "px" }, 300);
+                    $(items[i]).animate({ left: (goRight) + "px", top: (goDown) + "px" }, 150+i*30);
                 }
             };
             $("#restart").on("click", doStart);
@@ -178,8 +178,8 @@
                         items[i].onclick = null;
                     }
                     if (items[card1st].value == items[card2nd].value) {
-                        $(items[card1st]).animate({ left: (-100) + "px", top: (340) + "px" }, 300);
-                        $(items[card2nd]).animate({ left: (-100) + "px", top: (340) + "px" }, 300);
+                        $(items[card1st]).animate({ left: (-100) + "px", top: (340) + "px" }, 250);
+                        $(items[card2nd]).animate({ left: (-100) + "px", top: (340) + "px" }, 350);
                     }
                     setTimeout(function () {
                         for (var i = 0; i < items.length; i++) {
