@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            /* background-color: black; */
+            background-color: darkgreen;
+        }
+
+        #display {
+            height: 450px;
+            position: relative;
+            
+            background-color: darkgreen;
+        }
+
+        .container {
+            width: 400px;
+            /* background-color: aquamarine; */
+        }
+
+        .pkcard {
+            position: absolute;
+            height: 96px;
+            width: 71px;
+            background-image: url("撲克牌圖檔/back.gif");
+            margin: 0 auto;
+        }
+
+        #restart {
+            width: 400px;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mx-auto pt-5">
+        <div class="row border" id="display">
+            <!-- <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div>
+            <div class="col-3">
+                <div class="pkcard"></div>
+            </div> -->
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+            <div class="pkcard border border-dark"></div>
+        </div>
+    </div>
+    <button id="restart" type="button" class="btn btn-outline-light mt-2">洗牌</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+        $(function () {
+            var items = $(".pkcard").children().prevObject.toArray();
+            var randomCardNum;
+            var cardNum;
+            var card1st = -1;
+            var card2nd = -1;
+            doStart();
+            function doStart() {
+                card1st = -1;
+                card2nd = -1;
+                for (var a = 0; a < 16; a++) {
+                    $(items[a]).finish();
+                }
+                randomCardNum = [];
+                while (randomCardNum.length < 8) {
+                    var r = Math.floor(Math.random() * 1000) % 53;
+                    if (r != 0 && randomCardNum.indexOf(r) == -1) {
+                        randomCardNum[randomCardNum.length] = r;
+                    }
+                }
+                cardNum = [];
+                while (cardNum.length < 16) {
+                    var r = Math.floor(Math.random() * 1000) % randomCardNum.length;
+                    if (cardNum.indexOf(randomCardNum[r]) == -1) {
+                        cardNum[cardNum.length] = randomCardNum[r];
+                    }
+                    else {
+                        cardNum[cardNum.length] = randomCardNum[r];
+                        randomCardNum.splice(r, 1);
+                    }
+                }
+                console.log(randomCardNum.join(","));
+                console.log(cardNum.join(","));
+                for (var a = 0; a < 16; a++) {
+                    items[a].onclick = drawCard;
+                    items[a].value = cardNum[a];
+                    $(items[a]).css("left", -100 + "px").css("top", 340 + "px");
+                    $(items[a]).css("background-image", "url(撲克牌圖檔/back.gif)");
+                }
+                for (var i = 0; i < items.length; i++) {
+                    var goRight = 23.2 + (i % 4) * (23.2 + 71);
+                    var goDown = 13.2 + (Math.floor(i / 4)) * (13.2 + 96);
+                    $(items[i]).animate({ left: (goRight) + "px", top: (goDown) + "px" }, 300);
+                }
+            };
+            $("#restart").on("click", doStart);
+            function drawCard() {
+                for (var a = 0; a < 16; a++) {
+                    $(items[a]).finish();
+                }
+                var cardIndex = items.indexOf(this);
+                console.log(items[cardIndex].value);
+                $(items[cardIndex]).css("background-image", "url(撲克牌圖檔/" + items[cardIndex].value + ".gif)");
+                if (card1st == -1) {
+                    card1st = cardIndex;
+                    items[card1st].onclick = null;
+                }
+                else if (card2nd == -1) {
+                    card2nd = cardIndex;
+                    for (var i = 0; i < items.length; i++) {
+                        items[i].onclick = null;
+                    }
+                    if (items[card1st].value == items[card2nd].value) {
+                        $(items[card1st]).animate({ left: (-100) + "px", top: (340) + "px" }, 300);
+                        $(items[card2nd]).animate({ left: (-100) + "px", top: (340) + "px" }, 300);
+                    }
+                    setTimeout(function () {
+                        for (var i = 0; i < items.length; i++) {
+                            if (items[i].value != 0) {
+                                items[i].onclick = drawCard;
+                            }
+                        }
+                        console.log(card1st + " " + card2nd);
+                        if (items[card1st].value == items[card2nd].value) {
+                            items[card1st].onclick = null;
+                            items[card2nd].onclick = null;
+                            items[card1st].value = 0;
+                            items[card2nd].value = 0;
+                        }
+                        else {
+                            $(items[card1st]).css("background-image", "url(撲克牌圖檔/back.gif)");
+                            $(items[card2nd]).css("background-image", "url(撲克牌圖檔/back.gif)");
+                        }
+                        card1st = -1;
+                        card2nd = -1;
+                    }, 1000);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
