@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: black;
+        }
+
+        #display {
+            width: 250px;
+            height: 300px;
+            margin: 10px auto;
+            background-color: gray;
+            background-image: url("black.jpg");
+            position: relative;
+        }
+
+        #getNumList {
+            width: 250px;
+            margin: 10px auto;
+        }
+
+        .blackblock-r {
+            position: absolute;
+            width: 250px;
+            height: 300px;
+            background-color: black;
+            left: 250px;
+            z-index: 10;
+        }
+
+        .blackblock-l {
+            position: absolute;
+            width: 250px;
+            height: 300px;
+            background-color: black;
+            right: 250px;
+            z-index: 10;
+        }
+
+        .displayNum {
+            display: block;
+            width: 250px;
+            position: absolute;
+            line-height: 300px;
+            text-align: center;
+            font-size: 100px;
+            left: 250px;
+            background-image: url("black.jpg");
+            text-shadow: 3px 3px 3px black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mx-auto row text-white mt-3" style="width:400px;">
+        <div class="row">
+            <div class="input-group mb-3 col-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">最小號碼</span>
+                </div>
+                <input id="min" type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3 col-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">最大號碼</span>
+                </div>
+                <input id="max" type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div id="display">
+                <div class="blackblock-l"></div>
+                <!-- <h1 class="displayNum border-right border-left"></h1>
+                <h1 class="displayNum border-right border-left"></h1>
+                <h1 class="displayNum border-right border-left"></h1> -->
+                <h1 class="displayNum"></h1>
+                <h1 class="displayNum"></h1>
+                <h1 class="displayNum"></h1>
+                <div class="blackblock-r"></div>
+            </div>
+            <div class="col-12">
+                <button id="getNumList" type="button" class="btn btn-danger d-block">抽</button>
+            </div>
+
+        </div>
+    </div>
+    
+    <h2 id="result" class="col-12 text-center text-white text-break"> 抽獎號碼</h2>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            var aready = [];
+            var newList = [];
+            $("#getNumList").on("click", getNewRandomList);
+            function getNewRandomList() {
+                $($('.displayNum')[0]).css("left", "250px");
+                $($('.displayNum')[1]).css("left", "250px");
+                $($('.displayNum')[2]).css("left", "250px");
+                var minNum = $("#min").val() - 0;
+                var maxNum = $("#max").val() - 0;
+                if (aready.length == maxNum - minNum + 1) {
+                    return;
+                }
+                if (minNum >= maxNum || minNum <= 0) {
+                    return;
+                }
+                $("#min").attr("readonly", "readonly");
+                $("#max").attr("readonly", "readonly");
+                $("#getNumList").unbind();
+                newList = [];
+                while (aready.length + newList.length < maxNum - minNum + 1) {
+                    var r = Math.floor(Math.random() * 9999999) % (maxNum + 1);
+                    if (r >= minNum && aready.indexOf(r) == -1 && newList.indexOf(r) == -1) {
+                        // console.log(r);
+                        newList[newList.length] = r;
+                    }
+                }
+                r = Math.floor(Math.random() * 9999999) % (newList.length);
+                aready[aready.length] = newList[r];
+                test();
+                console.log("aready :" + aready.join(","));
+                console.log("newList :" + newList.join(","));
+            }
+            var n = 0;
+            var time = 0;
+            function test() {
+                // $($('.displayNum')[0]).finish();
+                // setTimeout(function () {
+                //     test();
+                // }, 1500);
+                // var s=$("#max").val()-$("#min").val();
+                var a = setInterval(function () {
+                    if (time>=4500) {
+                        clearInterval(a);
+                        $($('.displayNum')[n % 3]).text(aready[aready.length-1]);
+                        $($('.displayNum')[n % 3]).finish();
+                        $($('.displayNum')[n % 3]).css("left", "250px");
+                        $($('.displayNum')[n % 3]).animate({ left: "0px" }, 300, "linear");
+                        n = 0;
+                        time = 0;
+                        // if (aready.length > 10) {
+                        //     $("#result").text("已經抽過: ..." + aready[aready.length - 3] + "," + aready[aready.length - 2] + "," + aready[aready.length - 1]);
+                        // }
+                        // else {
+                        //     $("#result").text("已經抽過: " + aready.join(","));
+                        // }
+                        $("#result").text("已經抽過: " + aready.join(","));
+                        $("#getNumList").on("click", getNewRandomList);
+                    }
+                    else {
+
+                        $($('.displayNum')[n % 3]).text(newList[n % newList.length]);
+                        $($('.displayNum')[n % 3]).finish();
+                        $($('.displayNum')[n % 3]).css("left", "250px");
+                        $($('.displayNum')[n % 3]).animate({ left: "-250px" }, 600, "linear");
+                        n++;
+                        time=time+300;
+                    }
+                }, 300);
+            };
+        });
+    </script>
+</body>
+
+</html>
