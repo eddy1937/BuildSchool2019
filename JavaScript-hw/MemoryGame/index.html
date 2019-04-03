@@ -17,7 +17,7 @@
         #display {
             height: 450px;
             position: relative;
-            
+
             background-color: darkgreen;
         }
 
@@ -39,11 +39,25 @@
             display: block;
             margin: 0 auto;
         }
+
+        .cheat {
+            width: 80px;
+            height: 80px;
+            /* background-image: url("37.png"); */
+            background-size: cover;
+            background-color: gray;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container mx-auto pt-5">
+    <div class="row mx-auto" style="width:400px;">
+        <div class="cheat border rounded-circle my-3 mx-auto"></div>
+        <div class="cheat border rounded-circle my-3 mx-auto"></div>
+        <div class="cheat border rounded-circle my-3 mx-auto"></div>
+        <div class="cheat border rounded-circle my-3 mx-auto"></div>
+    </div>
+    <div class="container mx-auto">
         <div class="row border" id="display">
             <!-- <div class="col-3">
                 <div class="pkcard"></div>
@@ -113,16 +127,67 @@
     </div>
     <button id="restart" type="button" class="btn btn-outline-light mt-2">洗牌</button>
 
+    <h2 id="test"></h2>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script>
         $(function () {
             var items = $(".pkcard").children().prevObject.toArray();
+            var cheats = $(".cheat").children().prevObject.toArray();
             var randomCardNum;
             var cardNum;
             var card1st = -1;
             var card2nd = -1;
+            var cheat = [];
+            var checkCheat = [];
+            function doCheat() {
+                var time = 1;
+                checkCheat = [];
+                for (var i = 0; i < items.length; i++) {
+                    items[i].onclick = null;
+                    if (items[i].value != 0) {
+                        $(items[i]).css("background-image", "url(撲克牌圖檔/" + items[i].value + ".gif)");
+                    }
+                }
+                var a = setInterval(function () {
+                    if (time == 3) {
+                        clearInterval(a);
+                        for (var i = 0; i < items.length; i++) {
+                            if (items[i].value != 0 && i != card1st) {
+                                items[i].onclick = drawCard;
+                                $(items[i]).css("background-image", "url(撲克牌圖檔/back.gif)");
+                            }
+                        }
+                        getCheat();
+                        for (var a = 0; a < cheats.length; a++) {
+                            $(cheats[a]).css("background-color", "gray");
+                        }
+                    }
+                    time++;
+                }, 1000);
+            };
+            $(window).keydown(function (event) {
+                // $("#test").text(event.keyCode);
+                checkCheat[checkCheat.length] = event.keyCode;
+                for (var i = 0; i < checkCheat.length; i++) {
+                    if (checkCheat[i] != cheat[i]) {
+                        checkCheat = [];
+                        for (var a = 0; a < cheats.length; a++) {
+                            $(cheats[a]).css("background-color", "gray");
+                        }
+                        return;
+                    }
+                    else {
+                        $(cheats[i]).css("background-color", "white");
+                    }
+                }
+                if (checkCheat.length != cheat.length) {
+                    return;
+                }
+                doCheat();
+            });
             doStart();
             function doStart() {
+                getCheat();
                 card1st = -1;
                 card2nd = -1;
                 for (var a = 0; a < 16; a++) {
@@ -157,9 +222,23 @@
                 for (var i = 0; i < items.length; i++) {
                     var goRight = 23.2 + (i % 4) * (23.2 + 71);
                     var goDown = 13.2 + (Math.floor(i / 4)) * (13.2 + 96);
-                    $(items[i]).animate({ left: (goRight) + "px", top: (goDown) + "px" }, 150+i*30);
+                    $(items[i]).animate({ left: (goRight) + "px", top: (goDown) + "px" }, 150 + i * 30);
                 }
             };
+            function getCheat() {
+                cheat = [];
+                checkCheat = [];
+                while (cheat.length < 4) {
+                    var r = Math.floor(Math.random() * 100) % 4 + 37;
+                    if (cheat.indexOf(r) == -1) {
+                        cheat[cheat.length] = r;
+                    }
+                }
+                // $("#test").text(cheat.join(" "));
+                for (var i = 0; i < cheats.length; i++) {
+                    $(cheats[i]).css("background-image", "url('" + cheat[i] + ".png')");
+                }
+            }
             $("#restart").on("click", doStart);
             function drawCard() {
                 for (var a = 0; a < 16; a++) {
