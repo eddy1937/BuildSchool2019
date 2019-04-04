@@ -28,6 +28,41 @@
             width: 150px;
             height: 150px;
             /* background-color: red; */
+            background-image: url(photo.jpg);
+        }
+
+        @media screen and (max-width: 600px) {
+            #result {
+                width: 400px;
+                height: 400px;
+            }
+
+            #restart {
+                width: 400px;
+            }
+
+            .col-3 {
+                width: 100px;
+                height: 100px;
+                background-image: url(photo400.jpg);
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            #result {
+                width: 320px;
+                height: 320px;
+            }
+
+            #restart {
+                width: 320px;
+            }
+
+            .col-3 {
+                width: 80px;
+                height: 80px;
+                background-image: url(photo320.jpg);
+            }
         }
     </style>
 </head>
@@ -36,7 +71,7 @@
 
 
     <h2 class="text-center"></h2>
-    <div id="result" class="row">
+    <div id="result" class="">
         <div class="col-3 border"></div>
         <div class="col-3 border"></div>
         <div class="col-3 border"></div>
@@ -81,6 +116,7 @@
             var n_index = [];
             var s = "";
             var items = $(".col-3").children().prevObject.toArray();
+            var pic_w = 150;
             restart();
             doCheaked();
             var is = "";
@@ -93,16 +129,48 @@
             var ans = [];
             var ansZH = [];
             var n = 1;
+            $(window).resize(function () {
+                var wdth = window.innerWidth;
+                if (wdth > 600) {
+                    pic_w = 150;
+                }
+                else if (wdth > 400) {
+                    pic_w = 100;
+                }
+                else {
+                    pic_w = 80;
+                }
+                for (var i = 0; i < 16; i++) {
+                    var r = n_index[i];
+                    if(i==15){
+                        r=15;
+                    }
+                    var goRight = (r % 4) * pic_w;
+                    var goDown = (Math.floor(r / 4)) * pic_w;
+                    $(items[i]).css("left", goRight + "px").css("top", goDown + "px");
+                    $(items[i]).css("background-position-y", (Math.floor(i / 4)) * pic_w * -1 + "px").css("background-position-x", (i % 4) * pic_w * -1 + "px");
+                }
+            });
             function restart() {
+                var wdth = window.innerWidth;
+                if (wdth > 600) {
+                    pic_w = 150;
+                }
+                else if (wdth > 400) {
+                    pic_w = 100;
+                }
+                else {
+                    pic_w = 80;
+                }
                 n_index = [];
                 for (var i = 0; i < 16; i++) {
                     items[i].onclick = doClear;
                     items[i].value = i;
                     n_index[n_index.length] = i;
-                    var goRight = (i % 4) * 150;
-                    var goDown = (Math.floor(i / 4)) * 150;
+                    var goRight = (i % 4) * pic_w;
+                    var goDown = (Math.floor(i / 4)) * pic_w;
                     $(items[i]).css("left", goRight + "px").css("top", goDown + "px");
-                    $(items[i]).css("background-image", "url(photo.jpg)").css("background-position-y", (Math.floor(i / 4)) * -150 + "px").css("background-position-x", (i % 4) * -150 + "px");
+                    $(items[i]).css("background-position-y", (Math.floor(i / 4)) * pic_w * -1 + "px").css("background-position-x", (i % 4) * pic_w * -1 + "px");
                 }
             };
             function checkIndex() {
@@ -120,7 +188,7 @@
                 ansZH = [];
                 var num = Math.floor(Math.random() * 1000) % 20;
                 var n = -1;
-                while (ans.length < 20+num) {
+                while (ans.length < 20 + num) {
                     var r = Math.floor(Math.random() * 100) % 16;
                     // if (r != n) {
                     //     doChange(items[n_index.indexOf(r)]);
@@ -144,8 +212,8 @@
                 n_index[15] = lastIndex;
                 var r = n_index[nowIndex];
                 if ((lastIndex + 1 == r && lastIndex % 4 != 3) || (lastIndex - 1 == r && lastIndex % 4 != 0) || lastIndex - 4 == r || lastIndex + 4 == r) {
-                    var goRight = (r % 4) * 150;
-                    var goDown = (Math.floor(r / 4)) * 150;
+                    var goRight = (r % 4) * pic_w;
+                    var goDown = (Math.floor(r / 4)) * pic_w;
                     if (ans[ans.length - 1] == r) {
                         ans.pop();
                         ansZH.pop();
@@ -170,16 +238,16 @@
                         }
                     }
                     if (lastIndex + 1 == r) {//
-                        $(nowthis).animate({ left: (goRight - 150) + "px" }, 120);
+                        $(nowthis).animate({ left: (goRight - pic_w) + "px" }, 120);
                     }
                     if (lastIndex - 1 == r) {//
-                        $(nowthis).animate({ left: (goRight + 150) + "px" }, 120);
+                        $(nowthis).animate({ left: (goRight + pic_w) + "px" }, 120);
                     }
                     if (lastIndex + 4 == r) {//
-                        $(nowthis).animate({ top: (goDown - 150) + "px" }, 120);
+                        $(nowthis).animate({ top: (goDown - pic_w) + "px" }, 120);
                     }
                     if (lastIndex - 4 == r) {//
-                        $(nowthis).animate({ top: (goDown + 150) + "px" }, 120);
+                        $(nowthis).animate({ top: (goDown + pic_w) + "px" }, 120);
                     }
                     n_index[nowIndex] = lastIndex;
                     lastIndex = r;
