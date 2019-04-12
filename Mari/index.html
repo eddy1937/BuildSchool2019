@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>小瑪莉</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .item {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 10px;
+            z-index: 1;
+        }
+
+        .item-b {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border: 1px gray solid;
+            /* background-image: url(img/1.jpg); */
+            background-size: cover;
+        }
+
+        .item-d {
+            /* position: absolute; */
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border: 1px gray solid;
+            /* background-image: url(img/1.jpg); */
+            background-size: cover;
+        }
+
+        .item.on {
+            background-color: red;
+            border: 1px white solid;
+            /* border: 3px black solid; */
+            transition: 0s;
+        }
+
+        .item.off {
+            background-color: black;
+            border: 1px white solid;
+            transition: 0.3s;
+        }
+
+        .display {
+            width: 420px;
+            height: 420px;
+            /* margin: 0 auto; */
+            background-color: burlywood;
+            position: relative;
+            border: 1px black solid;
+            margin: 0 auto;
+        }
+
+        .display-r {
+            width: 480px;
+            height: 420px;
+            background-color: burlywood;
+            margin: 0 auto;
+        }
+
+        .con {
+            /* position: fixed; */
+            width: 500px;
+            /* display: flex; */
+            /* left: 50%;
+            margin-left: -580px; */
+            border: 5px black solid;
+            margin: 0 auto;
+            /* justify-content: space-between; */
+
+        }
+
+        div+input {
+            width: 60px;
+            text-align: right;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row mx-auto mb-2" style="width:420px">
+        <div class="input-group col-6 px-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text">獎金</span>
+            </div>
+            <input id="bonus" type="number" class="form-control" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" value="0" readonly>
+        </div>
+        <div class="input-group col-6 px-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text">總金額</span>
+            </div>
+            <input id="tolal" type="number" class="form-control" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" value="500" readonly>
+        </div>
+    </div>
+    <div class="display">
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+        <div class="item-b">
+            <div class="item off"></div>
+        </div>
+    </div>
+    <div class="text-center">
+        <div class="d-inline-block">
+            <h2>100</h2>
+            <div class="item-d" style="background-image: url(img/1.jpg);"></div>
+            <input type="number" name="" id="" value="0" readonly>
+            <button class="btn btn-outline-dark d-block w-100 item-btn" type="button">押!</button>
+        </div>
+        <div class="d-inline-block">
+            <h2>40</h2>
+            <div class="item-d" style="background-image: url(img/2.jpg);"></div>
+            <input type="number" name="" id="" value="0" readonly>
+            <button class="btn btn-outline-dark d-block w-100 item-btn" type="button">押!</button>
+        </div>
+        <div class="d-inline-block">
+            <h2>30</h2>
+            <div class="item-d" style="background-image: url(img/3.jpg);"></div>
+            <input type="number" name="" id="" value="0" readonly>
+            <button class="btn btn-outline-dark d-block w-100 item-btn" type="button">押!</button>
+        </div>
+        <div class="d-inline-block">
+            <h2>20</h2>
+            <div class="item-d" style="background-image: url(img/4.jpg);"></div>
+            <input type="number" name="" id="" value="0" readonly>
+            <button class="btn btn-outline-dark d-block w-100 item-btn" type="button">押!</button>
+        </div>
+        <div class="d-inline-block">
+            <h2>20</h2>
+            <div class="item-d" style="background-image: url(img/5.jpg);"></div>
+            <input type="number" name="" id="" value="0" readonly>
+            <button class="btn btn-outline-dark d-block w-100 item-btn" type="button">押!</button>
+        </div>
+        <div class="d-inline-block">
+            <h2>15</h2>
+            <div class="item-d" style="background-image: url(img/6.jpg);"></div>
+            <input type="number" name="" id="" value="0" readonly>
+            <button class="btn btn-outline-dark d-block w-100 item-btn" type="button">押!</button>
+        </div>
+        <div class="d-inline-block">
+            <h2>10</h2>
+            <div class="item-d" style="background-image: url(img/7.jpg);"></div>
+            <input type="number" name="" id="" value="0" readonly>
+            <button class="btn btn-outline-dark d-block w-100 item-btn" type="button">押!</button>
+        </div>
+        <div class="d-inline-block">
+            <h2>5</h2>
+            <div class="item-d" style="background-image: url(img/8.jpg);"></div>
+            <input type="number" name="" id="" value="0" readonly>
+            <button class="btn btn-outline-dark d-block w-100 item-btn" type="button">押!</button>
+        </div>
+    </div>
+    <div class="mx-auto row mt-2" style="width:510px;">
+        <div class="input-group col-7 px-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">下注單位</span>
+            </div>
+            <input id="min" type="number" class="form-control" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" value="0">
+        </div>
+        <button id="start" class="btn btn-danger col-5">開始</button>
+    </div>
+    <audio id="sound" src="sound.mp3"></audio>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            // var items = $(".display").children().toArray();
+            var items_b = $(".item-b").toArray();
+            var items = $(".item").toArray();
+            var index = 0;
+            var run;
+            var time = 20;
+            var sTime = -2;
+            var x = Math.PI / 2;
+            var steps = 0;
+            var pic = ["7", "5", "7", "1", "8", "8", "6", "4", "4", "0", "8", "7", "7", "5", "2", "2", "8", "6", "6", "3", "3", "0", "8", "5"];
+            var multiple = [100, 40, 30, 20, 20, 15, 10, 5];
+            console.log(items);
+            for (var i = 0; i <= items.length; i++) {
+                $(items_b[i]).css("background-image", "url(img/" + pic[i] + ".jpg)");
+                if (i <= 5) {
+                    $(items_b[i]).css("left", i * 60 + "px");
+                    $(items[i]).css("bottom", 0 + "px").css("margin-bottom", "-10px");
+                    if (i == 0) {
+                        $(items[i]).css("right", 0 + "px").css("margin-right", "-10px");;
+                    }
+                    else {
+                        $(items[i]).css("left", "50%").css("margin-left", "-10px");
+                    }
+                }
+                else if (i <= 11) {
+                    $(items_b[i]).css("right", 0 + "px").css("top", (i - 6) * 60 + "px");
+                    $(items[i]).css("left", 0 + "px").css("margin-left", "-10px");;
+                    if (i == 6) {
+                        $(items[i]).css("bottom", 0 + "px").css("margin-bottom", "-10px");;
+                    }
+                    else {
+                        $(items[i]).css("top", "50%").css("margin-top", "-10px");
+                    }
+                }
+                else if (i <= 17) {
+                    $(items_b[i]).css("bottom", 0 + "px").css("right", (i - 12) * 60 + "px");
+                    $(items[i]).css("top", 0 + "px").css("margin-top", "-10px");
+                    if (i != 12) {
+                        $(items[i]).css("left", "50%").css("margin-left", "-10px");
+                    }
+                    else {
+                        $(items[i]).css("margin-left", "-10px");
+                    }
+                }
+                else {
+                    $(items_b[i]).css("bottom", (i - 18) * 60 + "px");
+                    $(items[i]).css("right", 0 + "px").css("margin-right", "-10px");
+                    if (i != 18) {
+                        $(items[i]).css("top", "50%").css("margin-top", "-10px");
+                    }
+                    else {
+                        $(items[i]).css("margin-top", "-10px");
+                    }
+                }
+            }
+
+            var items_btn = $(".item-btn").toArray();
+            var items_input = $(".item-btn").prev().toArray();
+            console.log(items_btn);
+            $(".item-btn").on("click", function () {
+                var i = $("#min").val() - 0;
+                var $tolal = $("#tolal").val() - 0;
+                if ($tolal < i) {
+                    var $bonus = $("#bonus").val() - 0;
+                    $("#tolal").val($tolal + $bonus);
+                    $("#bonus").val(0);
+                    return;
+                }
+                if (i < 1) {
+                    i = 1;
+                }
+                items_input[items_btn.indexOf(this)].value = items_input[items_btn.indexOf(this)].value - 0 + i;
+                $("#tolal").val($tolal - i);
+            });
+            // var run = setInterval(startRun, 100);
+            function startRun() {
+                // var sx = document.getElementById("sound");
+                // sx.cloneNode().play();
+                // $(items[index]).css("background-color", "brown");
+                items[index].className = "item on";
+                var new_num = pic[index] - 0;
+                if (index - 1 < 0) {
+                    // $(items[23]).css("background-color", "white");
+                    items[23].className = "item off";
+                }
+                else {
+                    // $(items[index - 1]).css("background-color", "white");
+                    items[index - 1].className = "item off";
+                }
+                index++;
+                if (index == items.length) {
+                    index = 0;
+                }
+                clearInterval(run);
+                if (steps <= 0) {
+                    console.log(new_num);
+                    time = 20;
+                    if (new_num == 0) {
+                        return;
+                    }
+                    var $bonus = $("#bonus").val() - 0;
+                    $("#bonus").val($bonus + (items_input[new_num - 1].value - 0) * multiple[new_num - 1]);
+                    for (var i = 0; i < items_input.length; i++) {
+                        items_input[i].value = 0;
+                    }
+                    return;
+                }
+                steps--;
+                if (steps <= 11) {
+                    time = 100;
+                }
+                if (steps <= 9) {
+                    time = 150;
+                }
+                if (steps <= 7) {
+                    time = 200;
+                }
+                if (steps <= 5) {
+                    time = 300;
+                }
+                if (steps <= 3) {
+                    time = 500;
+                }
+                run = setInterval(startRun, time);
+            }
+            function doStop() {
+                clearInterval(run);
+                sTime = -2;
+            }
+            $("#start").on('click', doClick);
+            function doClick() {
+                steps = items.length * 5 + Math.floor(Math.random() * items.length);
+                run = setInterval(startRun, time);
+                // var stop = setTimeout(doStop, 5000);
+            }
+        });
+    </script>
+</body>
+
+</html>
