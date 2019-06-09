@@ -376,6 +376,53 @@ img {
   margin-bottom: 50px;
 }
 
+.block-no {
+  background-color: rgba(245, 245, 245, 0.85);
+  border: #24292e 1px solid;
+  border-radius: 15px;
+  -webkit-box-shadow: 1px 1px .5px #24292e;
+          box-shadow: 1px 1px .5px #24292e;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.block-no:hover .hidden {
+  -webkit-transform: scale(1, 1);
+          transform: scale(1, 1);
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.block-no:hover .nohidden {
+  -webkit-transform: scale(0, 0);
+          transform: scale(0, 0);
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.nohidden {
+  -webkit-transform: scale(1, 1);
+          transform: scale(1, 1);
+}
+
+.hidden {
+  position: absolute;
+  -webkit-transform: scale(0, 0);
+          transform: scale(0, 0);
+  padding: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.hidden a {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
 .transparency {
   background-color: rgba(255, 255, 255, 0.7);
   height: 100%;
